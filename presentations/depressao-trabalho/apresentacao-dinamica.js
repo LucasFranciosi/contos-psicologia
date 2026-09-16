@@ -3,6 +3,10 @@
   const nav = document.querySelector(".story-nav");
   const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); }), { threshold: .16 });
   document.querySelectorAll(".reveal").forEach(item => revealObserver.observe(item));
+  document.querySelectorAll(".tilt-media").forEach(media => {
+    media.addEventListener("pointermove", event => { const rect = media.getBoundingClientRect(); const x = (event.clientX - rect.left) / rect.width - .5; const y = (event.clientY - rect.top) / rect.height - .5; media.style.transform = `perspective(900px) rotateY(${x * 4}deg) rotateX(${y * -4}deg)`; });
+    media.addEventListener("pointerleave", () => { media.style.transform = ""; });
+  });
   sections.forEach((section, index) => { const button = document.createElement("button"); button.setAttribute("aria-label", `Ir para a seção ${index + 1}`); button.addEventListener("click", () => section.scrollIntoView({ behavior: "smooth" })); nav.append(button); });
   const navButtons = [...nav.children];
   const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { const index = sections.indexOf(entry.target); navButtons.forEach((button, buttonIndex) => button.classList.toggle("active", buttonIndex === index)); } }), { threshold: .5 });
