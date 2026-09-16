@@ -1,7 +1,7 @@
 const Auth = (() => {
   const SESSION_KEY = "contos-psicologia-session";
   // Altere estas credenciais para mudar o acesso ao portal.
-  const credentials = { usuario: "admin", senha: "contos123" };
+  const credentials = { usuario: "Socorro", senha: "gubilu" };
 
   function login(usuario, senha) {
     if (usuario === credentials.usuario && senha === credentials.senha) {

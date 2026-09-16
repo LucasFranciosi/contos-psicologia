@@ -12,9 +12,9 @@ const Player = (() => {
     app.innerHTML = `
       <section class="player" aria-label="Player de apresentação">
         <header class="player-bar player-head">
-          <button class="brand-button" id="player-back" title="Voltar para a palestra">Contos <span>&amp;</span> Psicologia</button>
+          <button class="brand-button" id="player-back" title="Voltar para a palestra"><img src="./assets/logo-symbol.png" alt="Contos e Psicologia"></button>
           <div class="player-title">${escape(palestra.titulo)} <span>·</span> ${escape(item.titulo)}</div>
-          <div class="player-actions"><button id="fullscreen" class="icon-button" title="Tela cheia (F)" aria-label="Tela cheia">⛶</button><button id="exit-player" class="text-button">Sair <span>×</span></button></div>
+          <div class="player-actions"><button id="fullscreen" class="icon-button" title="Tela cheia (F)">Tela cheia</button><button id="exit-player" class="text-button">Sair</button></div>
         </header>
         <div class="presentation-frame"><iframe id="presentation-iframe" src="${escape(item.src)}" title="${escape(item.titulo)}" allowfullscreen></iframe></div>
         <footer class="player-bar player-foot">

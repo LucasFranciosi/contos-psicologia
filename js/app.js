@@ -3,13 +3,13 @@ let selectedPalestra = null;
 const safe = value => String(value || "").replace(/[&<>"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]);
 
 function header() {
-  return `<header class="site-header"><a class="wordmark" href="#home">Contos <em>&amp;</em> Psicologia</a><button id="logout" class="logout">Sair</button></header>`;
+  return `<header class="site-header"><a class="wordmark" href="#home" aria-label="Contos e Psicologia"><img src="./assets/logo-lockup.png" alt="Contos e Psicologia — Consultoria em Saúde Mental"></a><button id="logout" class="logout">Sair</button></header>`;
 }
 function attachHeader() {
   document.getElementById("logout")?.addEventListener("click", () => { Auth.logout(); location.hash = "#login"; render(); });
 }
 function loginScreen() {
-  app.innerHTML = `<section class="login-page"><div class="login-card"><p class="eyebrow">Bem-vindo</p><h1>Contos <span>&amp;</span><br>Psicologia</h1><p class="intro">Um espaço para olhar, escutar e compartilhar.</p><form id="login-form"><label>Usuário<input name="usuario" autocomplete="username" required autofocus></label><label>Senha<input name="senha" type="password" autocomplete="current-password" required></label><p id="login-error" class="form-error" hidden>Usuário ou senha não conferem.</p><button class="primary" type="submit">Entrar</button></form></div></section>`;
+  app.innerHTML = `<section class="login-page"><div class="login-card"><img class="login-symbol" src="./assets/logo-symbol.png" alt=""><img class="login-lockup" src="./assets/logo-lockup.png" alt="Contos e Psicologia — Consultoria em Saúde Mental"><p class="intro">Um espaço para olhar, escutar e compartilhar.</p><form id="login-form"><label>Usuário<input name="usuario" autocomplete="username" required autofocus></label><label>Senha<input name="senha" type="password" autocomplete="current-password" required></label><p id="login-error" class="form-error" hidden>Usuário ou senha não conferem.</p><button class="primary" type="submit">Entrar</button></form></div></section>`;
   document.getElementById("login-form").addEventListener("submit", event => {
     event.preventDefault(); const form = new FormData(event.currentTarget);
     if (Auth.login(form.get("usuario"), form.get("senha"))) { location.hash = "#home"; render(); }
