@@ -32,6 +32,17 @@ Os slides ocupam a área inteira, têm transição suave e respondem a `→`, `�
 
 Edite `credentials` em [js/auth.js](js/auth.js) para alterar usuário e senha. A sessão permanece apenas enquanto a aba/navegador mantiver o `sessionStorage`.
 
+## Cadastrar uma nova palestra
+
+Após o login, use **Nova palestra**. O cadastro mantém quatro etapas: Entrada, Abertura, Apresentação e Encerramento. O rascunho é salvo durante o preenchimento.
+
+- **Entrada:** imagem, título e texto curto.
+- **Abertura:** URL de vídeo ou, sem vídeo, imagem, título e texto.
+- **Apresentação:** PowerPoint incorporável, cenas HTML (imagem, título e texto) ou ambos. Quando houver os dois, o player permite alternar entre “Experiência HTML” e “PowerPoint”.
+- **Encerramento:** imagem, frase de agradecimento/motivação e texto complementar.
+
+Imagens podem vir do computador ou de uma URL. Palestras criadas, imagens locais e rascunhos ficam somente neste navegador/dispositivo, em IndexedDB e armazenamento local. Elas não são enviadas ao repositório nem são sobrescritas por deploys do Netlify; o catálogo padrão em `data/palestras.js` continua separado.
+
 ## Netlify
 
 O [netlify.toml](netlify.toml) publica a raiz do repositório sem build. Conecte este repositório ao Netlify e escolha a branch `main`; cada push será publicado automaticamente. Também é possível usar `npx netlify deploy --prod` após autenticar na CLI.

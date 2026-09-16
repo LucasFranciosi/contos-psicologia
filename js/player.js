@@ -18,7 +18,7 @@ const Player = (() => {
           <div class="player-title">${escape(palestra.titulo)} <span>·</span> ${escape(item.titulo)}</div>
           <div class="player-actions"><button id="fullscreen" class="icon-button" title="Tela cheia (F)">Tela cheia</button><button id="exit-player" class="text-button">Sair</button><button class="brand-button" id="player-back" title="Voltar para a palestra"><img src="./assets/logo-symbol.png" alt="Contos e Psicologia"></button></div>
         </header>
-        ${item.visualizacoes ? `<div class="view-switch" role="tablist" aria-label="Modo de visualização">${item.visualizacoes.map((option, index) => `<button class="view-option ${index === viewIndex ? "active" : ""}" data-view="${index}" role="tab" aria-selected="${index === viewIndex}">${escape(option.rotulo)}</button>`).join("")}</div>` : ""}
+        ${item.visualizacoes ? `<div class="view-switch" role="tablist" aria-label="Modo de visualização">${item.visualizacoes.map((option, index) => `<button class="view-option ${index === viewIndex ? "active" : ""}" data-view="${index}" role="tab" aria-selected="${index === viewIndex}">${escape(option.rotulo || option.titulo)}</button>`).join("")}</div>` : ""}
         <div class="presentation-frame"><iframe id="presentation-iframe" src="${escape(iframeSrc)}" title="${escape(view.rotulo || item.titulo)}" allowfullscreen></iframe></div>
         <footer class="player-bar player-foot">
           <button id="previous-presentation" class="nav-button" ${current === 0 ? "disabled" : ""}>← <span>Anterior</span></button>
