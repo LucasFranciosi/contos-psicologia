@@ -28,6 +28,9 @@ const Player = (() => {
     document.getElementById("previous-presentation").addEventListener("click", previous);
     document.getElementById("next-presentation").addEventListener("click", next);
     document.getElementById("fullscreen").addEventListener("click", toggleFullscreen);
+    // Direciona o teclado ao PowerPoint/HTML carregado, sem interferir na
+    // navegação interna da apresentação.
+    document.getElementById("presentation-iframe").addEventListener("load", event => event.currentTarget.focus());
   }
   function open(selectedPalestra, index, app, exitCallback) {
     palestra = selectedPalestra; current = index; onExit = exitCallback;
@@ -39,16 +42,17 @@ const Player = (() => {
   function toggleFullscreen() { const player = document.querySelector(".player"); if (!document.fullscreenElement) player?.requestFullscreen?.(); else document.exitFullscreen?.(); }
   function keyboard(event) {
     if (!palestra || event.altKey || event.ctrlKey || event.metaKey) return;
-    if (event.key === "ArrowRight") { event.preventDefault(); next(); }
-    if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
+    // As setas pertencem ao conteúdo incorporado. Assim, no PowerPoint elas
+    // avançam os slides, e em apresentações HTML navegam a própria narrativa.
+    // A troca entre apresentações do portal fica restrita aos botões do rodapé.
     if (event.key.toLowerCase() === "f") { event.preventDefault(); toggleFullscreen(); }
     if (event.key === "Escape" && !document.fullscreenElement) leave();
   }
   window.addEventListener("keydown", keyboard);
   window.addEventListener("message", event => {
     if (!palestra || event.data?.type === undefined) return;
-    if (event.data.type === "presentation-finished") next();
-    if (event.data.type === "presentation-previous") previous();
+    // Eventos de limite dos HTMLs são intencionalmente ignorados: o avanço
+    // entre etapas é sempre uma decisão manual no player.
   });
   return { open };
 })();
