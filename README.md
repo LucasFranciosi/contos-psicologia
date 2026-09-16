@@ -1,10 +1,10 @@
 # Contos & Psicologia
 
-Portal estático para organizar palestras e suas apresentações. Ele usa somente HTML, CSS e JavaScript puro; não requer build, dependências ou servidor de aplicação.
+Portal em HTML, CSS e JavaScript puro para organizar palestras e suas apresentações. O frontend continua sem framework; o cadastro compartilhado usa Netlify Functions e Netlify Blobs.
 
 ## Executar localmente
 
-Abra `index.html` no navegador ou sirva a pasta por um servidor estático, por exemplo `npx serve .`. O acesso inicial é `Socorro.Franciosi` / `gubilu`. O nome de usuário não diferencia maiúsculas e minúsculas.
+Instale as dependências com `npm install`, configure as variáveis de `.env.example` no Netlify e execute `npx netlify dev`. O acesso inicial é definido no painel do Netlify por `PORTAL_USERNAME` e `PORTAL_PASSWORD`; o nome de usuário não diferencia maiúsculas e minúsculas.
 
 ## Conteúdo
 
@@ -41,8 +41,8 @@ Após o login, use **Nova palestra**. O cadastro mantém quatro etapas: Entrada,
 - **Apresentação:** PowerPoint incorporável, cenas HTML (imagem, título e texto) ou ambos. Quando houver os dois, o player permite alternar entre “Experiência HTML” e “PowerPoint”.
 - **Encerramento:** imagem, frase de agradecimento/motivação e texto complementar.
 
-Imagens podem vir do computador ou de uma URL. Palestras criadas, imagens locais e rascunhos ficam somente neste navegador/dispositivo, em IndexedDB e armazenamento local. Elas não são enviadas ao repositório nem são sobrescritas por deploys do Netlify; o catálogo padrão em `data/palestras.js` continua separado.
+Imagens podem vir do computador ou de uma URL. Ao salvar, as imagens locais e a palestra são enviadas ao catálogo compartilhado do Netlify e ficam disponíveis em outros dispositivos autenticados. Rascunhos permanecem locais até o salvamento. Registros antigos encontrados no navegador podem ser enviados pelo botão de migração; o catálogo padrão em `data/palestras.js` continua separado.
 
 ## Netlify
 
-O [netlify.toml](netlify.toml) publica a raiz do repositório sem build. Conecte este repositório ao Netlify e escolha a branch `main`; cada push será publicado automaticamente. Também é possível usar `npx netlify deploy --prod` após autenticar na CLI.
+O [netlify.toml](netlify.toml) publica a raiz e prepara as Functions em `netlify/functions`. No painel Netlify, configure `PORTAL_USERNAME`, `PORTAL_PASSWORD` e `SESSION_SECRET` (um valor longo e aleatório) para cada contexto de deploy. A branch `demanda/homologacao` deve usar Deploy Preview e suas próprias variáveis antes de qualquer merge na `main`. As palestras e imagens usam um armazenamento persistente por site, portanto não são removidas em novos deploys.
