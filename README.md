@@ -4,7 +4,7 @@ Portal estático para organizar palestras e suas apresentações. Ele usa soment
 
 ## Executar localmente
 
-Abra `index.html` no navegador ou sirva a pasta por um servidor estático, por exemplo `npx serve .`. O acesso inicial é `Socorro` / `gubilu`.
+Abra `index.html` no navegador ou sirva a pasta por um servidor estático, por exemplo `npx serve .`. O acesso inicial é `Socorro.Franciosi` / `gubilu`. O nome de usuário não diferencia maiúsculas e minúsculas.
 
 ## Conteúdo
 

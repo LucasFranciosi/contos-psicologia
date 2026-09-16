@@ -1,11 +1,13 @@
 const Auth = (() => {
   const SESSION_KEY = "contos-psicologia-session";
   // Altere estas credenciais para mudar o acesso ao portal.
-  const credentials = { usuario: "Socorro", senha: "gubilu" };
+  const credentials = { usuario: "Socorro.Franciosi", senha: "gubilu" };
 
   function login(usuario, senha) {
-    if (usuario === credentials.usuario && senha === credentials.senha) {
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ usuario, authenticated: true }));
+    const normalizedUser = String(usuario || "").trim().toLocaleLowerCase("pt-BR");
+    const configuredUser = credentials.usuario.toLocaleLowerCase("pt-BR");
+    if (normalizedUser === configuredUser && senha === credentials.senha) {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ usuario: credentials.usuario, authenticated: true }));
       return true;
     }
     return false;
